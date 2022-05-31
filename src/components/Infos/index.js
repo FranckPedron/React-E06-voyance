@@ -1,11 +1,17 @@
-function Infos() {
+import PropTypes from 'prop-types';
+
+function Infos({ number }) {
+  const word = (number % 2) === 0 ? 'pair' : 'impair';
   return (
     <section>
       <h2>Le savais-tu ?</h2>
-      <p>Le double de 0 est 0</p>
-      <p>0 est pair</p>
+      <p>Le double de {number} est {number * 2}</p>
+      <p>{number} est {word}</p>
     </section>
   );
 }
 
+Infos.propTypes = {
+  number: PropTypes.number.isRequired,
+};
 export default Infos;

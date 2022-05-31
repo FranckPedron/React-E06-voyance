@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
 import ButtonNumber from './ButtonNumber';
 
-function Form() {
+function Form({ prediction, setFavoriteNumber }) {
   return (
     <section>
       <form>
@@ -8,20 +9,25 @@ function Form() {
         <input id="numberInput" type="text" />
       </form>
       <div>
-        <ButtonNumber number={0} />
-        <ButtonNumber number={1} />
-        <ButtonNumber number={2} />
-        <ButtonNumber number={3} />
-        <ButtonNumber number={4} />
-        <ButtonNumber number={5} />
-        <ButtonNumber number={6} />
-        <ButtonNumber number={7} />
-        <ButtonNumber number={8} />
-        <ButtonNumber number={9} />
+        <ButtonNumber setFavoriteNumber={setFavoriteNumber} number={0} />
+        <ButtonNumber setFavoriteNumber={setFavoriteNumber} number={1} />
+        <ButtonNumber setFavoriteNumber={setFavoriteNumber} number={2} />
+        <ButtonNumber setFavoriteNumber={setFavoriteNumber} number={3} />
+        <ButtonNumber setFavoriteNumber={setFavoriteNumber} number={4} />
+        <ButtonNumber setFavoriteNumber={setFavoriteNumber} number={5} />
+        <ButtonNumber setFavoriteNumber={setFavoriteNumber} number={6} />
+        <ButtonNumber setFavoriteNumber={setFavoriteNumber} number={7} />
+        <ButtonNumber setFavoriteNumber={setFavoriteNumber} number={8} />
+        <ButtonNumber setFavoriteNumber={setFavoriteNumber} number={9} />
       </div>
-      <p>Je ne vois rien pour l'instant</p>
+      <p>{prediction}</p>
     </section>
   );
 }
+
+Form.propTypes = {
+  prediction: PropTypes.string.isRequired,
+  setFavoriteNumber: PropTypes.func.isRequired,
+};
 
 export default Form;
