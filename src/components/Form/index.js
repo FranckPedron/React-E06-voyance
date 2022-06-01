@@ -1,26 +1,36 @@
 import PropTypes from 'prop-types';
 import ButtonNumber from './ButtonNumber';
+import './style.scss';
 
-function Form({ prediction, setFavoriteNumber }) {
+function Form({
+  prediction, setFavoriteNumber, numberList, favoriteNumber,
+}) {
   return (
     <section>
-      <form>
-        <label htmlFor="numberInput">Dis-moi ton chiffre préféré, je te dirai qui tu es</label>
-        <input id="numberInput" type="text" />
+      <form className="form">
+        <label className="form-label" htmlFor="numberInput">Dis-moi ton chiffre préféré, je te dirai qui tu es</label>
+        <input
+          className="form-input"
+          id="numberInput"
+          type="text"
+          placeholder="Saisir un nombre"
+          onChange={(e) => setFavoriteNumber(e.target.value)}
+          value={favoriteNumber}
+        />
       </form>
       <div>
-        <ButtonNumber setFavoriteNumber={setFavoriteNumber} number={0} />
-        <ButtonNumber setFavoriteNumber={setFavoriteNumber} number={1} />
-        <ButtonNumber setFavoriteNumber={setFavoriteNumber} number={2} />
-        <ButtonNumber setFavoriteNumber={setFavoriteNumber} number={3} />
-        <ButtonNumber setFavoriteNumber={setFavoriteNumber} number={4} />
-        <ButtonNumber setFavoriteNumber={setFavoriteNumber} number={5} />
-        <ButtonNumber setFavoriteNumber={setFavoriteNumber} number={6} />
-        <ButtonNumber setFavoriteNumber={setFavoriteNumber} number={7} />
-        <ButtonNumber setFavoriteNumber={setFavoriteNumber} number={8} />
-        <ButtonNumber setFavoriteNumber={setFavoriteNumber} number={9} />
+        <button className="button" type="button" onClick={() => setFavoriteNumber('')}>Effacer</button>
+        {
+          numberList.map((currentValue) => (
+            <ButtonNumber
+              key={currentValue.number}
+              setFavoriteNumber={setFavoriteNumber}
+              number={currentValue.number}
+            />
+          ))
+        }
       </div>
-      <p>{prediction}</p>
+      <p className="prediction">{prediction}</p>
     </section>
   );
 }
@@ -28,6 +38,13 @@ function Form({ prediction, setFavoriteNumber }) {
 Form.propTypes = {
   prediction: PropTypes.string.isRequired,
   setFavoriteNumber: PropTypes.func.isRequired,
+  numberList: PropTypes.arrayOf(PropTypes.shape(
+    { number: PropTypes.number.isRequired },
+  )).isRequired,
+  favoriteNumber: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]).isRequired,
 };
 
 export default Form;

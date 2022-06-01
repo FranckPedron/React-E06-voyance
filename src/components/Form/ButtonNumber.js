@@ -6,7 +6,7 @@ function ButtonNumber({ number, setFavoriteNumber }) {
   };
 
   return (
-    <button type="button" onClick={handleClick}>{number}</button>
+    <button className="button" type="button" onClick={handleClick}>{number}</button>
   );
 }
 
